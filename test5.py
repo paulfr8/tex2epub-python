@@ -1,5 +1,21 @@
 import re
 
+1a_cmd_tex_op = []
+1a_cmd_htm_op = []
+1a_cmd_htm_ed = []
+
+def 1a_cmds_fillin (fcinp_1a_cmd_tex_op, fcinp_1a_cmd_htm_op, fcinp_1a_cmd_htm_ed):
+	1a_cmd_tex_op.append(fcinp_1a_cmd_tex_op)
+	1a_cmd_htm_op.append(fcinp_1a_cmd_htm_op)
+	1a_cmd_htm_ed.append(fcinp_1a_cmd_htm_ed)
+	
+1a_cmds_fillin ("\\textbf{","<b>","</b>")
+1a_cmds_fillin ("\\emph{","<em>","</em>")
+
+print(1a_cmd_tex_op)
+print(1a_cmd_htm_op)
+print(1a_cmd_htm_ed)
+
 def split_line (fcinp_char):
 	fcout_list = []
 	fcine_cmd = ""
@@ -130,7 +146,4 @@ def replace_one_arg_cmds (fcinp_string):
 	return (fcout_string)
 
 test_charstring = "\\textbf{blab\emph{3}la} \emph{Ro ro}"
-print (test_charstring)
 final_string = replace_one_arg_cmds (test_charstring)
-
-print(final_string)
