@@ -16,10 +16,17 @@ import re
 #punctuation
 #split files after big divisions <h1> or <h2>
 
+
+'''Commands lists for one-argument latex commands
+oa_cmd_tex_op: latex command
+oa_cmd_htm_op: xhtml opening tag
+oa_cmd_htm_ed: xhtml closing tag
+'''
 oa_cmd_tex_op = []
 oa_cmd_htm_op = []
 oa_cmd_htm_ed = []
 
+'''Fills in the commands list'''
 def oa_cmds_fillin (fcinp_oa_cmd_tex_op, fcinp_oa_cmd_htm_op, fcinp_oa_cmd_htm_ed):
 	oa_cmd_tex_op.append(fcinp_oa_cmd_tex_op)
 	oa_cmd_htm_op.append(fcinp_oa_cmd_htm_op)
@@ -35,12 +42,15 @@ oa_cmds_fillin ("\\subsection{","<h3>","</h3>")
 oa_cmds_fillin ("\\subsubsection{","<h4>","</h4>")
 
 
-
+'''Tests if a charstring is a latex command'''
 def is_there_oacmds (fcinp_charstring, fcinp_list):
 	for elt in fcinp_list:
 		if fcinp_charstring == elt:
 			return True
 
+'''Splits a charstring (a line of latex code) into latex commands and single characters for the characters that do no belong to a latex command'''
+'''Supports one-argument commands,
+TODO: make it support multiple argument commands, and single argument commands'''
 def split_line (fcinp_char):
 	fcout_list = []
 	fcine_cmd = ""
@@ -78,7 +88,9 @@ def split_line (fcinp_char):
 				fcout_list.append(char)
 				continue
 	return(fcout_list)
-      	
+
+'''Counts the number of commands in a charstring (line of Latex code)'''
+'''TODO: make it more simple: it should return directly the number of commands, and not the list of the commands'''
 def how_many_commands (fcinp_char):
 	fcout_list = []
 	fcine_cmd = ""
@@ -111,6 +123,8 @@ def how_many_commands (fcinp_char):
 	fcine_nb_cmds = len(fcout_list)
 	return(fcine_nb_cmds)      	
 
+'''Replace the latex commands of a list of elements given by split_line, based on the list of latex commands and their corresponding xhtml tags'''
+'''Only with one-argument commands'''
 def replace_tex (fcinp_txt_list, fcinp_nb_cmds, fcinp_cmds_list, fcinp_cmds_listb, fcinp_cmds_listc):
 	i = 0
 	fcout_list = fcinp_txt_list
@@ -163,7 +177,7 @@ def replace_tex (fcinp_txt_list, fcinp_nb_cmds, fcinp_cmds_list, fcinp_cmds_list
 	return(fcout_list)
 		
 		
-
+'''Converts a list of charstrings into one charstring'''
 def txt_list_2_txt_str(fcinptxtlist):
 	fcoutstring = ""
 	for elt in fcinptxtlist:
@@ -171,6 +185,7 @@ def txt_list_2_txt_str(fcinptxtlist):
 		continue
 	return (fcoutstring)
 
+'''Uses the previous functions to convert one-argument latex commands in a charstring into the corresponding xhtml tags, based on the list of commands'''
 def replace_one_arg_cmds (fcinp_string, fcinp_list, fcinp_listb, fcinp_listc):
 	fcine_split_line = split_line (fcinp_string)
 	fcine_nbcmds = how_many_commands (fcinp_string)
