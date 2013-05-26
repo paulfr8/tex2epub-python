@@ -1,0 +1,20 @@
+This project aims at creating a Python script to convert Latex sources (especially Xelatex) into .epub ebooks.
+
+Python Version:
+python 3
+(Python 3.3.1 more precisely)
+I know that the code is not compatible with python 2.*, but it should be compatible with any version of python 3.
+
+About the script so far:
+I am a beginner at Python, so I have written simple functions, without classes and advanced features, as I have not found yet how I could use these features.
+
+TODO List:
+Handle 2+ argument commands
+Handle tables
+Handle lists
+Handle 0-argument commands (e.g. \hline)
+Handle 1-argument commands splited over several lines
+
+Feel free to contribute.
+Please comment your contribution.
+Please create a branch for any major changes.
